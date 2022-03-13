@@ -26,8 +26,10 @@ Router.route('/register')
         try{
             const { name,email,password } = req.body;
             const newUser = new User({name, email, password});
+            console.log(newUser)
             const userSave =await newUser.save();
             if(userSave){
+                console.log(userSave)
                 return res.status(201).json({ success:true , message:"User successfully registered"});
             }
             return res.status(422).json({success : false ,message :"something went wrong"})

@@ -12,8 +12,6 @@ const Router = express.Router();
 //     }
 // } )
 
-
-
 Router.route('/').post(async(req,res) => {
     try{
         quizzes.map(async(ele,i) => {
@@ -40,4 +38,15 @@ Router.route('/').post(async(req,res) => {
         console.log(err.message)
     }
 })
+
+Router.route("/quizDashboard").get(async(req,res) =>{
+    try {
+        const getUsersData = await User.find().select("name score -_id")
+        return res.json({success:true,getUsersData})
+    } catch (error) {
+        console.log(error)
+    } 
+} )
+
+
 module.exports = Router
